@@ -1,0 +1,63 @@
+# <name> | <fps,from,to> | env vars (see MODLOG / source for meaning). Used by tests\hbtest.ps1.
+# Infantry views: HOMEBOTS_SPAWN_AT=x,y,z,yaw,pitch (UE units, cylinder centre 5 uu above the
+# ground; degrees) from crates/upk/examples/viewspot.rs (ground + line of sight checked offline).
+# d1: gate post STO_barriers indGateHalf (Barracks, loc -498,-5962), broadside at 6 m, noon
+d1  | 5,2,5  | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=AngelIsland HB_MODE=FL HB_SKINCARS=1 HB_WEATHER=clear HB_TIME=12 HOMEBOTS_SPAWN_AT=-199,-6481,-2176,130,5
+# d2: light-mapped Barrack_Building (Barracks, centre -1727,-5025), NW corner at 6 m, noon
+d2  | 5,2,5  | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=AngelIsland HB_MODE=FL HB_WEATHER=clear HB_TIME=12 HOMEBOTS_SPAWN_AT=-2858,-3894,-1949,-45,10
+# d3: farm house interior (Barracks), light-mapped inner wall Farm1_Wall_Int_Door_Solid at 5 m
+d3  | 5,2,5  | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=AngelIsland HB_MODE=FL HB_WEATHER=clear HB_TIME=12 HOMEBOTS_SPAWN_AT=-3339,-4766,-1989,-105,2
+# nb1: barn at objective A (Farm1_Extension_C + A_End door, god-ray Emitter_52 -512,5808,-1440) from 9 m outside, night
+nb1 | 5,2,5  | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=AngelIsland HB_MODE=FL HB_WEATHER=clear HB_TIME=0 HOMEBOTS_SPAWN_AT=119,6386,-1562,-139,4
+# nb2: house wall Farm1_Combined_A (light-mapped, near objective A) square-on at 5 m, lower half in view, night
+nb2 | 5,2,5  | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=AngelIsland HB_MODE=FL HB_WEATHER=clear HB_TIME=0 HOMEBOTS_SPAWN_AT=-1555,6037,-1563,133,10
+# sr1: screen rain drops, daylight rain, the d2 view (building edges behind the drops)
+sr1 | 10,1,5 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=AngelIsland HB_MODE=FL HB_WEATHER=rain HB_TIME=12 HB_SCREENRAIN=1 HOMEBOTS_SPAWN_AT=-2858,-3894,-1949,-45,10
+st1 | 5,0.5,12 | HB_MAP=AngelIsland HB_MODE=FL HOMEBOTS_TEST_VEHICLE=GCV_US_LAV_Content HB_VEHTEST=12 HB_VEHCAM=40,900,300 HB_WEATHER=storm HB_TIME=0 HB_SCREENRAIN=1 HB_TEST_VEHKILL=6
+# vd1: M1A3 standing (HB_VEHTEST_STILL) on open ground south of the barracks (no mesh within 10 m,
+# terrain +-1.2 m, nearest SpeedTree 7.5 m, none in the camera's view), camera 6.5 m front-left
+vd1 | 5,0.5,14 | HB_MAP=AngelIsland HB_MODE=FL HOMEBOTS_TEST_VEHICLE=GCV_US_M1A3_Content HOMEBOTS_SPAWN_AT=398,-8396,-2156,-90 HB_VEHTEST=12 HB_VEHTEST_STILL=1 HB_VEHCAM=40,650,250 HB_WEATHER=clear HB_TIME=12 HB_TEST_VEHHITS=1,3,5,7,9 HB_DMGDBG=1
+sm1 | 5,1,14 | HB_MAP=AngelIsland HB_MODE=FL HOMEBOTS_TEST_VEHICLE=GCV_US_M1114_Content HB_VEHTEST=14 HB_VEHCAM=40,600,200 HB_WEATHER=clear HB_TIME=12 HB_TEST_VEHKILL=3
+# ch1: FL-Crossroads jiggle car GCInteractiveSkelMeshActor_97 (DEST_CivilianCar01, loc -7736,-178,-549),
+# player 13.5 m away (viewspot dir 60, car centre visible; outside the 1024 uu explosion radius of it and of
+# its neighbour _128 at 10.9 m, which may chain-explode), HB_TEST_CAR picks _97 (not the car nearest the player),
+# scripted ATW_PROX rocket blasts at the car at 2 / 4 / 6 / 8 s (HB_TEST_CARHITS, 200 each): 2 s windows +
+# lights shatter, dust + jolt; 4 s doors / hood / trunk fly off (bone damage 400 >= 300); 6 s engine fire
+# (600 >= 500); 11 s explosion (SP Burndown 5 s; Vehicle_Civilian2 + SC_LightVehicleAnnihilation_SP),
+# remaining parts thrown up, burning wreck (Fire_WreckChassis), car darkened (burnt)
+ch1 | 5,1,14 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=Crossroads HB_MODE=FL HB_WEATHER=clear HB_TIME=12 HB_TEST_CARHITS=2,4,6,8 HB_TEST_CAR=-7736,-178 HB_CARDBG=1 HOMEBOTS_SPAWN_AT=-7061,991,-548,-120,1
+# pa1: PA-Mast an Ziel B der ersten Frontlinie (Crossroads, B bei UE -9910,1309) muss neben der Straße stehen,
+# nicht auf der Fahrbahn (pa.rs spot_ok: 1,5 m Abstand zu Straßenflächen); Blick entlang der Straße auf B aus 24 m
+# (viewspot dir 270, vis 4/5). Log: "pa: pole at ...".
+pa1 | 5,2,5 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=Crossroads HB_MODE=FL HB_WEATHER=clear HB_TIME=12 HOMEBOTS_SPAWN_AT=-9910,-1091,-438,93,2
+# ads1: holographic reticle over the road edge strip (Crossroads RoadSpline_5, M_asphalt_road_edge_crossroads ->
+# M_Road_Translucent, south edge ~8 m from the centre line); spline start -12798,-221 is BEHIND the camera
+# (looking east along the edge, aim down sights held by HOMEBOTS_TEST_ADS). Before: the edge strip sorted
+# after the sight and hid the red dot; after: the dot stays visible over the strip.
+ads1 | 10,1,6 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=Crossroads HB_MODE=FL HB_WEATHER=rain HB_TIME=12 HOMEBOTS_TEST_ADS=1 HOMEBOTS_SPAWN_AT=-7800,640,-519,0,-10
+# cb1: Crossroads, creek bridge of RoadSpline_13 (concrete guard rails, UE -3015,1411) from the creek bank 8.6 m SW (user 22:00 "Kollisionsbox neben der kleinen Brücke"), pawn collision overlay + crosshair label (HB_DEBUG_COLLISION=1, coldebug.rs)
+cb1 | 5,1,8  | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=Crossroads HB_MODE=FL HB_WEATHER=clear HB_TIME=12 HB_DEBUG_COLLISION=1 HOMEBOTS_SPAWN_AT=-3500,700,-636,56,-5
+# tr1: Angel Island KPA truck StaticMeshActor_402 (VEH_military NK_truck + bed NK_truck_back_01, Barracks, loc -2837,-4484,-2070,
+# bounds centre -2891,-4378), player 14.5 m away (viewspot dir 60 d 1450, vis 5/5; 13.6 m from the SP explosion point, outside its
+# 1024 uu radius; jiggle car _17 11 m from the truck, no chain), HB_TEST_CAR picks the truck, ATW_PROX blasts (200 each) at 2/4/6/8 s:
+# 2 s cab glass shatters (WindowExplode_Side), 6 s engine fire at the cab (600 >= 500), 11 s explosion (Burndown 5 s; SP NKTruck
+# Vehicle_Jeep + SC_LightVehicleAnnihilation_SP), wreck fire mid-truck (Fire_WreckChassis), truck + bed darkened, collision stays
+tr1 | 5,1,14 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=12 HB_MAP=AngelIsland HB_MODE=FL HB_WEATHER=clear HB_TIME=12 HB_TEST_CARHITS=2,4,6,8 HB_TEST_CAR=-2891,-4378 HB_CARDBG=1 HOMEBOTS_SPAWN_AT=-2112,-3228,-1902,-128,-3
+# sp0-sp4: flicker hunt (user 2026-10-23: coloured full-screen frames on Spillway / Farm / Bridge). Spillway FL, the
+# autospawn view, 20 s of play at 10 fps, only the mean colour per frame (rec_<name>\means.csv, HB_RECORD_NOPNG).
+# sp0 baseline (clear, 19 h as in the user's log), sp1 without the weather fog pass, sp2 without the scene copy,
+# sp3 without dynamic lights, sp4 without the weather at all.
+sp0 | 10,0.5,20 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19
+sp1 | 10,0.5,20 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HB_NOFOGPASS=1
+sp2 | 10,0.5,20 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HB_NOSCENECOPY=1
+sp3 | 10,0.5,20 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HB_NODYNLIGHTS=1
+sp4 | 10,0.5,20 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=off
+# sp5: real time (fps 0: no fixed step, every frame's mean colour), walking forward, turning 40 deg/s
+# and firing - the fixed-step runs above showed no flicker. nk0-nk3: the same with a nuke called 2 s
+# after the spawn (no match win: play goes on after it), nk1 no fog pass, nk2 no scene copy, nk3 no
+# dynamic lights (the user: the flicker comes after a nuke, NOT from data)
+sp5 | 0,0.5,40 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HOMEBOTS_TEST_FORWARD=1 HOMEBOTS_TEST_FIRE=1 HB_TEST_TURN=40
+nk0 | 0,0.5,75 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HOMEBOTS_TEST_FORWARD=1 HOMEBOTS_TEST_FIRE=1 HB_TEST_TURN=40 HB_NUKETEST=2 HB_NUKE_NOWIN=1
+nk1 | 0,0.5,75 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HOMEBOTS_TEST_FORWARD=1 HOMEBOTS_TEST_FIRE=1 HB_TEST_TURN=40 HB_NUKETEST=2 HB_NUKE_NOWIN=1 HB_NOFOGPASS=1
+nk2 | 0,0.5,75 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HOMEBOTS_TEST_FORWARD=1 HOMEBOTS_TEST_FIRE=1 HB_TEST_TURN=40 HB_NUKETEST=2 HB_NUKE_NOWIN=1 HB_NOSCENECOPY=1
+nk3 | 0,0.5,75 | HB_RECORD_PLAY=1 HB_RECORD_WARMUP=8 HB_RECORD_NOPNG=1 HB_MAP=Spillway HB_MODE=FL HB_WEATHER=clear HB_TIME=19 HOMEBOTS_TEST_FORWARD=1 HOMEBOTS_TEST_FIRE=1 HB_TEST_TURN=40 HB_NUKETEST=2 HB_NUKE_NOWIN=1 HB_NODYNLIGHTS=1

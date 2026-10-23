@@ -1,0 +1,7 @@
+target/
+logs/
+**/logs/
+dist/
+*.log
+*.jsonl
+homebots_settings.ini

@@ -1,0 +1,15 @@
+[package]
+name = "upk"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+byteorder = "1.5.0"
+half = "2.7.1"
+lzokay-native = "0.1.0"
+texture2ddecoder = "0.1.2"
+thiserror = "2.0.21"
+
+[dev-dependencies]
+image = { version = "0.25.10", default-features = false, features = ["png"] }
+naga = { version = "24", features = ["wgsl-in"] }

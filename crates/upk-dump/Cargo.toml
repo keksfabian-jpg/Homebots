@@ -1,0 +1,7 @@
+[package]
+name = "upk-dump"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+upk = { version = "0.1.0", path = "../upk" }

@@ -1,0 +1,10 @@
+[workspace]
+resolver = "2"
+members = ["crates/homebots","crates/upk", "crates/upk-dump"]
+
+# Fast dependencies even in debug builds (Bevy is very slow unoptimised).
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+codegen-units = 4

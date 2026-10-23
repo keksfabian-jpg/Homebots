@@ -1,0 +1,16 @@
+External content for the nuke sequence (not from the game)
+
+Plane: c130.hbm
+  "C130" by manilov.ap (https://sketchfab.com/manilov.ap)
+  https://sketchfab.com/3d-models/c130-ce61f8750c9346a8b2e4e4160bd6c845
+  License: CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/)
+  Changes: livery removed and repainted almost black (markings and insignia removed),
+  parts converted to the game format (axes, propeller groups), Fulton yoke added.
+
+Sounds (Pixabay Content License, https://pixabay.com/service/license-summary/), converted to Ogg,
+trimmed, levels matched:
+  nuke_boom.ogg    "Nuclear Explosion" - unfa (Freesound) / freesound_community, pixabay.com 63470
+  nuke_blast.ogg   "Huge Explosion" - Nuclearboy (Freesound) / freesound_community, pixabay.com 62521
+  nuke_rumble.ogg  "Nuclear distant" - Svarvarn (Freesound) / freesound_community, pixabay.com 73138
+  nuke_siren.ogg   "Civil Defense Siren" - SoundReality, pixabay.com 128262
+  nuke_plane.ogg, nuke_engine.ogg  "War Planes Overhead!" - SoundsExciting (Freesound) / freesound_community, pixabay.com 33188

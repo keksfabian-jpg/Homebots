@@ -1,0 +1,21 @@
+[package]
+name = "homebots"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+naga = { version = "24", features = ["wgsl-in"] }
+bevy = { version = "0.16", default-features = false, features = ["bevy_pbr", "bevy_render", "bevy_core_pipeline", "bevy_sprite", "bevy_winit", "bevy_window", "bevy_asset", "bevy_state", "tonemapping_luts", "ktx2", "zstd", "multi_threaded", "std", "x11", "png", "bevy_log", "bevy_audio", "wav", "vorbis", "configurable_error_handler", "trace", "sysinfo_plugin"] }
+upk = { version = "0.1.0", path = "../upk" }
+bytemuck = { version = "1", features = ["derive"] }
+# Vorbis decoding of the sound waves once at load (already a dependency of rodio / bevy_audio)
+lewton = "0.10"
+# output device sample rate for the sound mixer bus (already a dependency of rodio / bevy_audio)
+cpal = "0.15"
+# Bink video (GPL-3.0-or-later, pure Rust port of FFmpeg bink.c/binkaudio.c)
+infinitier_bik_decoder = "0.0.14"
+bevy_egui = { version = "0.36", default-features = false, features = ["render", "default_fonts"] }
+
+[dev-dependencies]
+# examples/sfx_burst.rs: the old per-sound rodio Sink path for the before / after measurement
+rodio = { version = "0.20", default-features = false }
